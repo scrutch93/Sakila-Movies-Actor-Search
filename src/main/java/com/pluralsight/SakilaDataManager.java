@@ -47,7 +47,7 @@ public class SakilaDataManager {
 
        List<Film> filmList = new ArrayList<>();
 
-       String sql = "SELECT f.film_id, title, description, release_year, length FROM film f" +
+       String sql = "SELECT f.film_id, title, description, release_year, length FROM film f " +
                "JOIN film_actor a ON f.film_id = a.film_id " +
                "WHERE actor_id = ?";
 

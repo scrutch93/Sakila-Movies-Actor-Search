@@ -25,11 +25,26 @@ public class mainApp {
 
         SakilaDataManager dataManager = new SakilaDataManager(dataSource);
 
+        Scanner input = new Scanner (System.in);
         System.out.println("Welcome.");
+        System.out.println("How would you like to search?");
+        System.out.println(" 1) Search actor by last name");
+        System.out.println(" 2) Search actor by id");
+        int selection = input.nextInt();
+        switch(selection){
+            case 1:
+                ActorSearchByLastName(dataManager);
+                break;
+            case 2:
+                FilmSearchByID(dataManager);
+                break;
+            default:
+                System.out.println("Not a valid selection.");
+                break;
+        }
 
-        //ActorSearchByLastName(dataManager);
 
-        FilmSearchByID(dataManager);
+
     }
 
 
