@@ -27,50 +27,13 @@ public class mainApp {
 
         System.out.println("Welcome.");
 
-        ActorSearch(dataManager);
+        //ActorSearchByLastName(dataManager);
 
-
-//        getActorLastName(dataSource);
-//
-//        getFirstAndLastName(dataSource);
-
-
+        FilmSearchByID(dataManager);
     }
 
-//    public static void getActorLastName(DataSource dataSource) throws SQLException {
-//        System.out.println("Enter the lastname of an actor you fancy: ");
-//        String response = input.nextLine().toUpperCase().trim();
-//
-//        try (
-//                Connection connection = dataSource.getConnection();
-//
-//                PreparedStatement preparedStatement = connection.prepareStatement(
-//                        "SELECT first_name, last_name FROM actor " +
-//                                "WHERE last_name = ?")
-//        ) {
-//            preparedStatement.setString(1, response);
-//
-//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//
-//                while (resultSet.next()) {
-//                  String lastName =  resultSet.getString("last_name");
-//                  String firstName = resultSet.getString("first_name");
-//                    System.out.println(firstName + " " + lastName);
-//
-//                }
-//
-//            }
-//
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
 
-
-    public static void ActorSearch(SakilaDataManager dataManager) throws SQLException {
+    public static void ActorSearchByLastName(SakilaDataManager dataManager) throws SQLException {
 
         System.out.println("Enter the last name of an actor you fancy: ");
         String last = input.nextLine().toUpperCase().trim();
@@ -82,38 +45,17 @@ public class mainApp {
 
     }
 
-//    public static void getFirstAndLastName(DataSource dataSource){
-//        System.out.println("Enter the first and last name of an actor you fancy: ");
-//        System.out.println("First Name: ");
-//        String first = input.nextLine().toUpperCase().trim();
-//        System.out.println("Last Name: ");
-//        String last =  input.nextLine().toUpperCase().trim();
-//
-//        try (
-//                Connection connection = dataSource.getConnection();
-//
-//                PreparedStatement preparedStatement = connection.prepareStatement(
-//                        "SELECT first_name, last_name FROM actor " +
-//                                "WHERE first_name = ? AND last_name = ?")
-//        ) {
-//            preparedStatement.setString(1, first);
-//            preparedStatement.setString(2, last);
-//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//
-//                while (resultSet.next()) {
-//                    String lastName =  resultSet.getString("last_name");
-//                    String firstName = resultSet.getString("first_name");
-//                    System.out.println(firstName + " " + lastName);
-//
-//                }
-//
-//            }
-//
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+    public static void FilmSearchByID(SakilaDataManager dataManager) throws SQLException{
+
+        System.out.println("Enter the ID of an actor to see all of their movies: ");
+        int actorId = input.nextInt();
+
+        List<Film> actorsFilms = dataManager.getFilms(actorId);
+
+        actorsFilms.forEach(System.out::println);
+
+
+    }
+
+
 }

@@ -5,9 +5,7 @@ import java.sql.*;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 
 public class SakilaDataManager {
 
@@ -43,6 +41,42 @@ public class SakilaDataManager {
 
         return actorList;
     }
+
+
+    public List<Film> getFilms(int actorId) throws SQLException {
+
+       List<Film> filmList = new ArrayList<>();
+
+       String sql = "SELECT f.film_id, title, description, release_year, length FROM film f" +
+               "JOIN film_actor a ON f.film_id = a.film_id " +
+               "WHERE actor_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, actorId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                int filmId = resultSet.getInt("film_id");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                int releaseYear = resultSet.getInt("release_year");
+                int length = resultSet.getInt("length");
+
+                Film film = new Film(filmId, title, description, releaseYear, length);
+
+                filmList.add(film);
+
+            }
+
+        return filmList;
+
+        }
+
+    }
+
+
 
 
 
